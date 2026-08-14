@@ -1,0 +1,26 @@
+# dsh-notify bundle patch: push task-completion notifications.
+#
+# Mounts the notifier over any base profile (web / headless / tui). When a
+# turn ends, the plugin waits debounceMs of quiet, then sends a summary to
+# every configured channel (ServerChan / DingTalk / Feishu / generic webhook).
+#
+# Configuration (via the profile's cordis.patch.yml or --patch overlays):
+#   - id: notify
+#     config:
+#       enabled: true
+#       debounceMs: 10000
+#       channels:
+#         - type: serverchan
+#           url: https://sctapi.ftqq.com/<SENDKEY>.send
+#         - type: dingtalk
+#           url: https://oapi.dingtalk.com/robot/send?access_token=<TOKEN>
+#           secret: <可选加签 secret>
+#         - type: feishu
+#           url: https://open.feishu.cn/open-apis/bot/v2/hook/<TOKEN>
+#         - type: generic
+#           url: https://example.com/hook
+
+- insert:
+    - id: notify
+      name: 'dsh-notify'
+      inject: [sessions]
