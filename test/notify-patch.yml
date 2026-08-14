@@ -1,0 +1,12 @@
+# End-to-end test overlay: point the notify plugin at the local hook server.
+- id: notify
+  config:
+    enabled: true
+    channels:
+      - type: generic
+        url: http://127.0.0.1:9999/hook
+    debounceMs: 2000
+    summaryMaxChars: 300
+    titlePrefix: '[test] '
+    notifyOnCompleted: true
+    notifyOnError: true
